@@ -31,6 +31,16 @@ def follow_instructions(stacks,instructions):
         stacks1[end][0:0]=move_crates
     return stacks1
 
+def follow_instructions2(stacks,instructions):
+    
+    stacks1=copy.deepcopy(stacks)
+    
+    for num, start, end in instructions:
+        move_crates=stacks1[start][0:num]
+        stacks1[start]=stacks1[start][num:]
+        stacks1[end][0:0]=move_crates
+    return stacks1
+
 #{v: temp[0][i] for v,i in enumerate(mapping)}
 
 stacks_str,instructions_str=parse_file("input_day5.txt")
@@ -43,3 +53,7 @@ instructions = get_instructions(instructions_str)
 final_stacks=follow_instructions(stacks,instructions)
 
 "".join([val[0] for (key,val) in final_stacks.items()])
+
+final_stacks2=follow_instructions2(stacks,instructions)
+
+"".join([val[0] for (key,val) in final_stacks2.items()])
