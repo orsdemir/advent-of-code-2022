@@ -1,26 +1,18 @@
 def solve(positions):
-    positions=positions[1:]
     steps_t=[(0,0)]
-    delta={(0,2):(0,1),(0,-2):(0,-1),(-1,-2):(-1,-1),}
     for row_h, col_h in positions:
         row_t, col_t= steps_t[-1]
         dist_row, dist_col = row_t-row_h, col_t-col_h
-        
-        
+               
         if abs(dist_row)>1 or abs(dist_col)>1:
             dir_row = 1 if row_h >= row_t else -1
             dir_col= 1 if col_h >= col_t else -1
-
-         
             delta_row, delta_col = (dir_row*max(0,abs(row_t-row_h)-1), dir_col*max(0,abs(col_t-col_h)-1)) if dist_row ==0 or dist_col==0 else (dir_row, dir_col)
             steps_t += [(row_t+delta_row, col_t+delta_col)]
-            
-        else:
-            steps_t.append(steps_t[-1])
 
     return steps_t
 
-with open("input_day9_test.txt") as f:
+with open("input_day9.txt") as f:
     raw_data=f.read().splitlines()
 
 data=iter([e.split(' ')[0],int(e.split(' ')[1])] for e in raw_data)
